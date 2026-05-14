@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Markdown Workspace</title>
+    
+    <script src="./js/marked.min.js"></script>
+    <script src="./js/turndown.js"></script>
+    <script src="./js/turndown-plugin-gfm.js"></script>
+    <script src="./js/html2pdf.bundle.min.js"></script> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css"> 
+
+</head>
+<body data-theme="dark">
+
+    <header>
+        <div class="toolbar-group">
+            <span class="app-title">Markdown Flow</span>
+            <button onclick="location.reload()">📄 New</button>
+            <label class="upload-btn">📂 Open MD<input type="file" id="file-input" accept=".md,.txt,.markdown"></label>
+            <button id="btn-download" class="primary-btn">💾 Save MD</button>
+            <button id="btn-export-pdf" class="success-btn">📥 Export PDF</button>
+        </div>
+        <div class="toolbar-group">
+            <button id="theme-toggle">☀️ Light Mode</button>
+        </div>
+    </header>
+
+    <div id="floating-toolbar">
+        <button onmousedown="event.preventDefault(); formatText('bold')"><b>B</b></button>
+        <button onmousedown="event.preventDefault(); formatText('italic')"><i>I</i></button>
+        <button onmousedown="event.preventDefault(); formatText('code')">&lt; &gt;</button>
+        <button onmousedown="event.preventDefault(); formatText('H1')">H1</button>
+        <button onmousedown="event.preventDefault(); formatText('H2')">H2</button>
+        <button onmousedown="event.preventDefault(); formatText('H3')">H3</button>
+        <button onmousedown="event.preventDefault(); formatText('blockquote')">Block Quote</button>
+        <button onmousedown="event.preventDefault(); formatText('insertUnorderedList')">• List</button>
+        <button onmousedown="event.preventDefault(); formatText('indent')">⇥ Sublist</button>
+    </div>
+
+    <div class="workspace">
+        <div id="editor-container" class="pane">
+            <div class="local-toolbar">
+                <span class="label">Syntax</span>
+                <button onmousedown="event.preventDefault(); insertWrapper('**', '**', 'Bold')"><b>B</b></button>
+                <button onmousedown="event.preventDefault(); insertWrapper('*', '*', 'Italic')"><i>I</i></button>
+                <button onmousedown="event.preventDefault(); insertPrefix('# ', 'Heading')">H1</button>
+                <button onmousedown="event.preventDefault(); insertPrefix('## ', 'Subheading')">H2</button>
+                <button onmousedown="event.preventDefault(); insertPrefix('### ', 'Subheading')">H3</button>
+                <button onmousedown="event.preventDefault(); insertPrefix('> ', 'Quote')">Block Quote</button>
+                <button onmousedown="event.preventDefault(); insertWrapper('`', '`', 'Code')">&lt; &gt; Inline</button>
+                <button onmousedown="event.preventDefault(); insertWrapper('\n```\n', '\n```\n', 'Code Block')">&lt;/&gt; Block</button>
+                <button onmousedown="event.preventDefault(); insertPrefix('- ', 'List Item')">• List</button>
+                <button onmousedown="event.preventDefault(); insertPrefix('    - ', 'Sublist Item')">⇥ Sublist</button>
+                <button onmousedown="event.preventDefault(); insertLink()">🔗 Link</button>
+                <button onmousedown="event.preventDefault(); insertImage()">🖼️ Image</button>
+                <button onmousedown="event.preventDefault(); insertAtCursor('\n| H1 | H2 |\n|---|---|\n| D1 | D2 |\n')">📊 Table</button>
+            </div>
+            <textarea id="editor" placeholder="# Start typing your markdown here...">
+# Markdown syntax guide
+## Headers
+
+# This is a Heading h1
+## This is a Heading h2
+### This is a Heading h3
+
+## Emphasis
+
+*This text will be italic*  
+_This will also be italic_
+
+**This text will be bold**  
+__This will also be bold__
+
+_You **can** combine them_
+
+## Lists
+
+### Unordered
+
+* Item 1
+* Item 2
+* Item 2a
+* Item 2b
+    * Item 3a
+    * Item 3b
+
+### Ordered
+
+1. Item 1
+2. Item 2
+3. Item 3
+    1. Item 3a
+    2. Item 3b
+
+## Images
+
+![This is an alt text.](/image/Markdown-mark.svg "This is a sample image.")
+
+## Links
+
+You may be using [Markdown Live Preview](https://markdownlivepreview.com/).
+
+## Blockquotes
+
+> Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
+>
+>> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+
+## Tables
+
+| Left columns  | Right columns |
+| ------------- |:-------------:|
+| left foo      | right foo     |
+| left bar      | right bar     |
+| left baz      | right baz     |
+
+## Blocks of code
+
+```
+let message = 'Hello world';
+alert(message);
+```
+
+## Inline code
+
+This web site is using `inline Code`.
+   
+
+            </textarea>
+        </div>
+        
+        <div class="resizer" id="resizer"></div>
+        
+        <div id="preview-container" class="pane">
+            <div class="local-toolbar">
+                <span class="label">Visual</span>
+                <button onmousedown="event.preventDefault(); formatText('pre')">&lt;/&gt; Block</button>
+                <button onmousedown="event.preventDefault(); formatText('blockquote')">Block Quote</button>
+                <button onmousedown="event.preventDefault(); formatText('insertUnorderedList')">• List</button>
+                <button onmousedown="event.preventDefault(); formatText('indent')">⇥ Sublist</button>
+                <button onmousedown="event.preventDefault(); insertVisualLink()">🔗 Link</button>
+                <button onmousedown="event.preventDefault(); insertVisualImage()">🖼️ Image</button>
+                <button onmousedown="event.preventDefault(); insertVisualTable()">📊 Table</button>
+                <button onmousedown="event.preventDefault(); addTableRow()" style="margin-left:auto;">+ Row</button>
+                <button onmousedown="event.preventDefault(); addTableCol()">+ Col</button>
+            </div>
+            <div class="pdf-wrapper" id="pdf-wrapper">
+                <div id="preview-pane" contenteditable="true"></div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/manupulation.main.script.js"></script>  
+</body>
+</html>

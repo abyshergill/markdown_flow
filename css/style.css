@@ -1,0 +1,91 @@
+/* --- CSS Variables --- */
+:root {
+--bg-body: #f7f7f9; --bg-panel: #ffffff; --bg-header: #ffffff;
+--text-main: #111827; --text-muted: #6b7280; --border-color: #e5e7eb;
+--accent: #3b82f6; --accent-hover: #2563eb; --pdf-btn: #10b981;
+--pdf-btn-hover: #059669; --btn-bg: #ffffff; --btn-border: #d1d5db;
+--btn-hover: #f3f4f6; --code-bg: #f3f4f6; --code-text: #eb5757;
+--resizer-color: transparent; --resizer-hover: #cbd5e1;
+--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+--bg-body: #171717; --bg-panel: #262626; --bg-header: #1e1e1e;
+--text-main: #f3f4f6; --text-muted: #9ca3af; --border-color: #404040;
+--accent: #60a5fa; --accent-hover: #93c5fd; --pdf-btn: #10b981;
+--pdf-btn-hover: #059669; --btn-bg: #262626; --btn-border: #525252;
+--btn-hover: #404040; --code-bg: #171717; --code-text: #ff8a8a;
+--resizer-color: transparent; --resizer-hover: #525252;
+--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Base --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* HIDDEN SCROLLBARS FOR CLEAN UI */
+* { -ms-overflow-style: none; scrollbar-width: none; }
+::-webkit-scrollbar { display: none; }
+
+body { font-family: 'Inter', sans-serif; height: 100vh; display: flex; flex-direction: column; background-color: var(--bg-body); color: var(--text-main); transition: background-color 0.3s, color 0.3s; overflow: hidden; }
+
+/* --- Main Header --- */
+header { background: var(--bg-header); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); z-index: 10; }
+.toolbar-group { display: flex; gap: 10px; align-items: center; }
+.app-title { font-weight: 700; font-size: 16px; margin-right: 15px; color: var(--text-main); letter-spacing: -0.5px;}
+
+button, .upload-btn { padding: 6px 12px; cursor: pointer; border: 1px solid var(--btn-border); background: var(--btn-bg); border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-main); transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+button:hover, .upload-btn:hover { background: var(--btn-hover); }
+input[type="file"] { display: none; }
+.primary-btn { background: var(--accent); color: white; border-color: var(--accent); }
+.primary-btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: white; }
+.success-btn { background: var(--pdf-btn); color: white; border-color: var(--pdf-btn); }
+.success-btn:hover { background: var(--pdf-btn-hover); border-color: var(--pdf-btn-hover); color: white; }
+
+/* --- Workspace & Local Toolbars --- */
+.workspace { display: flex; flex: 1; overflow: hidden; padding: 12px; gap: 4px; position: relative; }
+.pane { background: var(--bg-panel); border-radius: 8px; border: 1px solid var(--border-color); display: flex; flex-direction: column; box-shadow: var(--shadow-sm); }
+
+.local-toolbar { 
+display: flex; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--border-color); 
+background: var(--bg-header); border-radius: 8px 8px 0 0; flex-wrap: wrap; 
+align-items: center; min-height: 48px; 
+}
+.local-toolbar span.label { font-size: 12px; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; margin-right: 8px; text-transform: uppercase; letter-spacing: 0.5px;}
+.local-toolbar button { padding: 4px 8px; font-size: 12px; }
+
+#editor-container { width: 50%; }
+.resizer { width: 8px; cursor: col-resize; background: var(--resizer-color); border-radius: 4px; transition: background 0.2s; flex-shrink: 0; }
+.resizer:hover, .resizer.active { background: var(--resizer-hover); }
+#preview-container { flex: 1; }
+
+#editor { flex: 1; width: 100%; border: none; resize: none; font-family: 'Courier New', Courier, monospace; font-size: 14px; line-height: 1.6; padding: 20px; outline: none; background: transparent; color: var(--text-main); }
+.pdf-wrapper { padding: 20px; flex: 1; overflow-y: auto; }
+#preview-pane { line-height: 1.6; outline: none; min-height: 100%; cursor: text; }
+
+/* --- Floating Format Toolbar --- */
+#floating-toolbar { position: fixed; display: none; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: var(--shadow-lg); border-radius: 8px; padding: 4px; gap: 4px; z-index: 1000; }
+#floating-toolbar button { padding: 4px 8px; font-size: 14px; border: 1px solid transparent; }
+#floating-toolbar button:hover { background: var(--btn-hover); }
+#floating-toolbar button.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+/* --- Preview Elements Styling --- */
+#preview-pane h1, #preview-pane h2, #preview-pane h3 { border-bottom: 1px solid var(--border-color); padding-bottom: 0.3em; margin-top: 1.5em; margin-bottom: 16px;}
+#preview-pane h1:first-child { margin-top: 0; }
+#preview-pane code { background: var(--code-bg); color: var(--code-text); padding: 0.2em 0.4em; border-radius: 4px; font-family: monospace; }
+#preview-pane pre { background: var(--code-bg); padding: 16px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border-color); }
+#preview-pane pre code { background: none; color: inherit; padding: 0; }
+#preview-pane blockquote { border-left: 4px solid var(--accent); margin: 0; padding-left: 1em; color: var(--text-muted); }
+#preview-pane table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+#preview-pane th, #preview-pane td { border: 1px solid var(--border-color); padding: 8px 12px; }
+
+/* --- FIXED LIST & SUBLIST STYLING --- */
+#preview-pane ul, #preview-pane ol { padding-left: 28px; margin-bottom: 16px; margin-top: 4px; }
+#preview-pane li { margin-bottom: 6px; }
+#preview-pane ul ul, #preview-pane ol ul, #preview-pane ul ol, #preview-pane ol ol { margin-top: 6px; margin-bottom: 0; padding-left: 28px; }
+#preview-pane ul { list-style-type: disc; } 
+#preview-pane ul ul { list-style-type: circle; } 
+#preview-pane ul ul ul { list-style-type: square; } 
+
+.dummy-media { background: var(--btn-hover); border: 2px dashed var(--border-color); border-radius: 8px; padding: 24px; text-align: center; color: var(--text-muted); margin: 16px 0; }
