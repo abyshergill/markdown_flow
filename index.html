@@ -17,10 +17,11 @@
 
     <header>
         <div class="toolbar-group">
-            <span class="app-title">Markdown Flow</span>
+            <span class="app-title">MarkFlow</span>
             <button onclick="location.reload()">📄 New</button>
             <label class="upload-btn">📂 Open MD<input type="file" id="file-input" accept=".md,.txt,.markdown"></label>
             <button id="btn-download" class="primary-btn">💾 Save MD</button>
+            <button id="btn-export-html" style="background: var(--accent); color: white; border-color: var(--accent);">🌐 Export HTML</button>
             <button id="btn-export-pdf" class="success-btn">📥 Export PDF</button>
         </div>
         <div class="toolbar-group">
@@ -35,30 +36,23 @@
         <button onmousedown="event.preventDefault(); formatText('H1')">H1</button>
         <button onmousedown="event.preventDefault(); formatText('H2')">H2</button>
         <button onmousedown="event.preventDefault(); formatText('H3')">H3</button>
-        <button onmousedown="event.preventDefault(); formatText('blockquote')">Block Quote</button>
         <button onmousedown="event.preventDefault(); formatText('insertUnorderedList')">• List</button>
-        <button onmousedown="event.preventDefault(); formatText('indent')">⇥ Sublist</button>
     </div>
 
     <div class="workspace">
         <div id="editor-container" class="pane">
             <div class="local-toolbar">
-                <span class="label">Syntax</span>
-                <button onmousedown="event.preventDefault(); insertWrapper('**', '**', 'Bold')"><b>B</b></button>
-                <button onmousedown="event.preventDefault(); insertWrapper('*', '*', 'Italic')"><i>I</i></button>
-                <button onmousedown="event.preventDefault(); insertPrefix('# ', 'Heading')">H1</button>
-                <button onmousedown="event.preventDefault(); insertPrefix('## ', 'Subheading')">H2</button>
-                <button onmousedown="event.preventDefault(); insertPrefix('### ', 'Subheading')">H3</button>
-                <button onmousedown="event.preventDefault(); insertPrefix('> ', 'Quote')">Block Quote</button>
-                <button onmousedown="event.preventDefault(); insertWrapper('`', '`', 'Code')">&lt; &gt; Inline</button>
-                <button onmousedown="event.preventDefault(); insertWrapper('\n```\n', '\n```\n', 'Code Block')">&lt;/&gt; Block</button>
-                <button onmousedown="event.preventDefault(); insertPrefix('- ', 'List Item')">• List</button>
-                <button onmousedown="event.preventDefault(); insertPrefix('    - ', 'Sublist Item')">⇥ Sublist</button>
-                <button onmousedown="event.preventDefault(); insertLink()">🔗 Link</button>
-                <button onmousedown="event.preventDefault(); insertImage()">🖼️ Image</button>
-                <button onmousedown="event.preventDefault(); insertAtCursor('\n| H1 | H2 |\n|---|---|\n| D1 | D2 |\n')">📊 Table</button>
+                <span class="label">Insert Syntax</span>
+                <button onmousedown="event.preventDefault(); insertAtCursor('# Heading\n')">H1</button>
+                <button onmousedown="event.preventDefault(); insertAtCursor('## Subheading\n')">H2</button>
+                <button onmousedown="event.preventDefault(); insertAtCursor('### Subheading\n')">H3</button>
+                <button onmousedown="event.preventDefault(); insertAtCursor('\n```\nCode Block\n```\n')">&lt;/&gt; Code Block</button>
+                <button onmousedown="event.preventDefault(); insertAtCursor('- List Item\n')">List</button>
+                <button onmousedown="event.preventDefault(); insertAtCursor('[Link](https://)')">Link</button>
+                <button onmousedown="event.preventDefault(); insertAtCursor('![Img](https://)')">Image</button>
+                <button onmousedown="event.preventDefault(); insertAtCursor('\n| H1 | H2 |\n|---|---|\n| D1 | D2 |\n')">Table</button>
             </div>
-            <textarea id="editor" placeholder="# Start typing your markdown here...">
+            <textarea id="editor" placeholder="# Welcome to MarkFlow&#10;&#10;Start typing here...">
 # Markdown syntax guide
 ## Headers
 
@@ -127,8 +121,6 @@ alert(message);
 ## Inline code
 
 This web site is using `inline Code`.
-   
-
             </textarea>
         </div>
         
@@ -136,11 +128,7 @@ This web site is using `inline Code`.
         
         <div id="preview-container" class="pane">
             <div class="local-toolbar">
-                <span class="label">Visual</span>
-                <button onmousedown="event.preventDefault(); formatText('pre')">&lt;/&gt; Block</button>
-                <button onmousedown="event.preventDefault(); formatText('blockquote')">Block Quote</button>
-                <button onmousedown="event.preventDefault(); formatText('insertUnorderedList')">• List</button>
-                <button onmousedown="event.preventDefault(); formatText('indent')">⇥ Sublist</button>
+                <span class="label">Visual Insert</span>
                 <button onmousedown="event.preventDefault(); insertVisualLink()">🔗 Link</button>
                 <button onmousedown="event.preventDefault(); insertVisualImage()">🖼️ Image</button>
                 <button onmousedown="event.preventDefault(); insertVisualTable()">📊 Table</button>
