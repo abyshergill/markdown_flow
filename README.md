@@ -10,7 +10,10 @@ Because it requires absolutely no backend server, everything runs securely and q
 ##  Live Demo
 
 You can try out MarkFlow directly in your browser without downloading anything!
-**[Click here to view the Live Demo](https://www.google.com/search?q=https://abyshergill.github.io/markdown_flow/)** 
+**[Click here to view the Live Demo](https://abyshergill.github.io/markdown_flow/)** 
+
+
+![Image Alt](./assests/main.jpg)
 ## How to Clone and Run Locally
 Since MarkFlow has zero backend dependencies, setting it up is incredibly simple.
 
@@ -36,7 +39,7 @@ Simply double-click the `index.html` file to open it in your default web browser
 * **Smart Formatting Toggles:** Highlight text to easily toggle headings, bold/italics, code blocks, lists, and quotes.
 * **Dark & Light Mode:** Sleek, modern interface that supports both dark and light themes natively.
 * **Smart PDF Export:** Convert your markdown into a perfectly formatted, printable PDF (the app auto-adjusts for Light mode during export for perfect printing).
-* **HTML Export:** Convert your markdown into a perfectly formatted HTML code. 
+* **Smart HTML Export:** Convert your markdown into a perfectly formatted HTML files.
 * **Offline Capable:** Once loaded, it runs entirely on client-side JavaScript.
 
 ## How to Use Markdown
@@ -62,9 +65,9 @@ Markdown is a lightweight markup language that you can use to add formatting ele
 
 This project wouldn't be possible without the incredible open-source libraries that power the core parsing and conversion features. A huge thank you to the creators of the following tools used via CDN:
 
-* **[Marked.js (v4.3.0)](https://www.google.com/search?q=https://cdn.jsdelivr.net/npm/marked%404.3.0/marked.min.js):** For fast, robust Markdown-to-HTML parsing.
-* **[Turndown.js (v7.1.2)](https://www.google.com/search?q=https://unpkg.com/turndown%407.1.2/dist/turndown.js):** For the magic of converting HTML back into clean Markdown.
-* **[Turndown GFM Plugin (v1.0.2)](https://www.google.com/search?q=https://unpkg.com/turndown-plugin-gfm%401.0.2/dist/turndown-plugin-gfm.js):** For adding GitHub Flavored Markdown support, notably tables.
+* **[Marked.js (v4.3.0)](https://cdn.jsdelivr.net/npm/marked%404.3.0/marked.min.js):** For fast, robust Markdown-to-HTML parsing.
+* **[Turndown.js (v7.1.2)](https://unpkg.com/turndown%407.1.2/dist/turndown.js):** For the magic of converting HTML back into clean Markdown.
+* **[Turndown GFM Plugin (v1.0.2)](https://unpkg.com/turndown-plugin-gfm%401.0.2/dist/turndown-plugin-gfm.js):** For adding GitHub Flavored Markdown support, notably tables.
 * **[html2pdf.js (v0.10.1)](https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js):** For rendering the visual HTML view into downloadable PDF documents entirely on the client side.
 
 ## 📄 License <p align="center">
